@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#173247">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DC RENOV">
+<title>DC RENOV — Devis & factures</title>
+<style>
+:root{--navy:#173247;--blue:#2868a6;--green:#167653;--bg:#f3f6f8;--card:#fff;--ink:#182630;--muted:#657581;--line:#dce4e9;--soft:#eaf0f4;--red:#b83b3b;--shadow:0 5px 18px #18324710}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{background:var(--navy);color:#fff;padding:18px 17px 20px;border-radius:0 0 22px 22px}
+.headrow{max-width:760px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:23px;font-weight:850;letter-spacing:1px}.subtitle{font-size:12px;color:#c8d6df;margin-top:2px}
+.headbtn{border:1px solid #ffffff55;background:#ffffff15;color:#fff;border-radius:11px;padding:9px 11px;font-size:13px}
+.wrap{max-width:760px;margin:auto;padding:15px 14px 42px}
+h1,h2,h3,p{margin-top:0}h2{font-size:20px;margin-bottom:12px}h3{font-size:16px;margin-bottom:9px}
+.muted,.hint{color:var(--muted);font-size:13px}.section{margin:18px 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.homegrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.homebtn{border:0;border-radius:17px;min-height:130px;padding:16px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow)}
+.homebtn .ico{font-size:27px}.homebtn strong{font-size:17px;display:block}.homebtn small{font-size:12px;opacity:.82}
+.homebtn.blue{background:#e4effb;color:#174f80}.homebtn.green{background:#e3f3eb;color:#176447}.homebtn.purple{background:#eee8f8;color:#62458c}.homebtn.orange{background:#fff0df;color:#92521d}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:12px 14px;font-weight:650;min-height:45px}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.good{background:var(--green);border-color:var(--green);color:#fff}.btn.danger{color:var(--red);border-color:#e7c5c5;background:#fff}
+.btn.soft{background:var(--soft)}.btn.small{min-height:36px;padding:7px 10px;font-size:13px}.btn.full{width:100%}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.actions>*{flex:1}
+.field{margin:10px 0}.field label{display:block;font-size:13px;font-weight:700;color:#53636e;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;border:1px solid #cfd9e0;border-radius:11px;padding:12px;background:#fff;color:#182630;min-height:46px}
+.field textarea{min-height:76px;resize:vertical}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.pill{display:inline-block;border-radius:999px;padding:4px 9px;background:var(--soft);font-size:12px;color:#40515d}
+.item{border:1px solid var(--line);border-radius:13px;padding:12px;margin:9px 0;background:#fff}
+.itemtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.itemtitle{font-weight:750}.itemmeta{font-size:13px;color:var(--muted);margin-top:3px}
+.linecard{border:1px solid var(--line);border-radius:13px;padding:12px;margin:10px 0}
+.linehead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.linegrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.linegrid .field{margin:7px 0}
+.totalbox{background:#f1f6f8;border-radius:13px;padding:12px;margin-top:12px}
+.totalrow{display:flex;justify-content:space-between;padding:5px 0;gap:12px}.totalrow.big{font-size:20px;font-weight:850;border-top:1px solid #d4dfe5;margin-top:5px;padding-top:11px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.toolbar .btn{flex:1}
+.search{margin:8px 0 12px}.search input{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px}
+.bottomnav{position:sticky;bottom:0;z-index:4;background:#f3f6f8ed;backdrop-filter:blur(12px);padding:9px 0 calc(9px + env(safe-area-inset-bottom));display:flex;gap:8px}
+.bottomnav button{flex:1;min-width:0}
+.hidden{display:none!important}
+.notice{padding:11px 12px;border-radius:11px;background:#fff6df;color:#745018;font-size:13px;margin:10px 0}
+.success{padding:11px 12px;border-radius:11px;background:#e6f4ec;color:#176447;font-size:13px;margin:10px 0}
+.docpaper{background:#fff;color:#111;padding:22px;border:1px solid #d6dce0;border-radius:10px;font:12px/1.45 Arial,sans-serif}
+.dochead{display:flex;justify-content:space-between;gap:12px;border-bottom:3px solid #173247;padding-bottom:13px}
+.dochead h2{color:#173247;font-size:22px;margin:0}.docright{text-align:right}.docgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:16px 0}.docgrid h4{background:#eaf0f4;padding:5px;margin:0 0 5px;color:#173247}.docgrid p{margin:2px 0}
+.doctable{width:100%;border-collapse:collapse;margin-top:14px}.doctable th{background:#173247;color:white;text-align:left;padding:7px}.doctable td{border-bottom:1px solid #ddd;padding:7px;vertical-align:top}.right{text-align:right;white-space:nowrap}
+.doctot{width:240px;margin:13px 0 0 auto}.doctot div{display:flex;justify-content:space-between;padding:4px}.doctot .grand{border-top:2px solid #173247;font-weight:bold;font-size:15px;padding-top:8px}
+@media(max-width:420px){.homebtn{min-height:116px;padding:13px}.homebtn strong{font-size:15px}.grid3{grid-template-columns:1fr 1fr}.docpaper{padding:12px}.dochead h2{font-size:19px}}
+@media print{body{background:#fff}.no-print,header,.bottomnav{display:none!important}.wrap{max-width:none;padding:0}.docpaper{border:0;border-radius:0;padding:0}@page{size:A4;margin:12mm}}
+</style>
+</head>
+<body>
+<header class="no-print">
+ <div class="headrow">
+  <div><div class="brand">DC RENOV</div><div class="subtitle">Devis · Factures · Suivi des chantiers</div></div>
+  <button class="headbtn" data-action="settings">⚙ Réglages</button>
+ </div>
+</header>
+<main class="wrap" id="app"></main>
+<script>
+"use strict";
+const KEY="dc_renov_app_v1";
+const defaults={
+ settings:{company:"DC RENOV",address:"",zipcity:"",phone:"",email:"",siret:"",vatid:"",insurance:"",mediator:"",capital:"",defaultVat:"10",deposit:"30",quoteValidity:"30",paymentDays:"30",latePenalty:"",recovery:"40",legalNote:""},
+ clients:[],docs:[],catalog:[
+  {name:"Cloison en plaques de plâtre",unit:"m²",price:35,vat:10},
+  {name:"Doublage / isolation intérieure",unit:"m²",price:42,vat:10},
+  {name:"Pose de plafond en plaques de plâtre",unit:"m²",price:38,vat:10},
+  {name:"Fourniture et pose d'isolant",unit:"m²",price:18,vat:10},
+  {name:"Bandes à joints",unit:"m²",price:8,vat:10},
+  {name:"Enduit de finition",unit:"m²",price:12,vat:10},
+  {name:"Dépose / démolition",unit:"m²",price:15,vat:10},
+  {name:"Ossature métallique",unit:"ml",price:12,vat:10},
+  {name:"Habillage / coffrage",unit:"ml",price:25,vat:10},
+  {name:"Main-d'œuvre",unit:"heure",price:45,vat:10}
+ ],counters:{quote:0,invoice:0}
+};
+let db=loadDB(),state={screen:"home",doc:null,editClient:null,filter:""};
+function loadDB(){try{const x=JSON.parse(localStorage.getItem(KEY));return x?{...structuredClone(defaults),...x,settings:{...defaults.settings,...x.settings},counters:{...defaults.counters,...x.counters}}:structuredClone(defaults)}catch(e){return structuredClone(defaults)}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(db))}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function money(n){return (Number(n)||0).toLocaleString("fr-FR",{style:"currency",currency:"EUR"})}
+function today(){let d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function el(id){return document.getElementById(id)}
+function setScreen(s){state.screen=s;render()}
+function home(){state.doc=null;state.editClient=null;setScreen("home")}
+function newDoc(type="Devis",from=null){
+ const n=from?structuredClone(from):null;
+ state.doc=n?{...n,id:null,number:"",type:"Facture",date:today(),status:"Brouillon",payments:[],sourceQuote:n.number||""}:{id:null,number:"",type,date:today(),dueDate:"",status:"Brouillon",clientId:"",clientName:"",clientAddress:"",clientPhone:"",clientEmail:"",site:"",subject:"",notes:"",lines:[],depositRate:Number(db.settings.deposit)||0,payments:[],sourceQuote:""};
+ setScreen("editor");
+}
+function openDoc(id){let d=db.docs.find(x=>x.id===id);if(!d)return;state.doc=structuredClone(d);setScreen("editor")}
+function nextNumber(type){let k=type==="Devis"?"quote":"invoice";db.counters[k]=(db.counters[k]||0)+1;persist();return (type==="Devis"?"DEV":"FAC")+"-"+new Date().getFullYear()+"-"+String(db.counters[k]).padStart(4,"0")}
+function calc(d){let ht=0,tva=0;for(const l of d.lines||[]){let base=(Number(l.qty)||0)*(Number(l.price)||0);ht+=base;tva+=base*(Number(l.vat)||0)/100}let ttc=ht+tva,paid=(d.payments||[]).reduce((s,p)=>s+(Number(p.amount)||0),0);return{ht,tva,ttc,paid,balance:ttc-paid,deposit:ttc*(Number(d.depositRate)||0)/100}}
+function homeView(){let recent=[...db.docs].sort((a,b)=>(b.updated||b.created||0)-(a.updated||a.created||0)).slice(0,3);return `
+ <section class="card"><h2>Que souhaitez-vous faire ?</h2>
+ <div class="homegrid">
+ <button class="homebtn blue" data-action="new-quote"><span class="ico">📄</span><span><strong>Nouveau devis</strong><small>Préparer un devis client</small></span></button>
+ <button class="homebtn green" data-action="new-invoice"><span class="ico">🧾</span><span><strong>Nouvelle facture</strong><small>Facturer une prestation</small></span></button>
+ <button class="homebtn purple" data-action="clients"><span class="ico">👥</span><span><strong>Mes clients</strong><small>Coordonnées enregistrées</small></span></button>
+ <button class="homebtn orange" data-action="documents"><span class="ico">📁</span><span><strong>Mes documents</strong><small>Devis et factures</small></span></button>
+ </div></section>
+ <section class="card"><div class="itemtop"><h3>Derniers documents</h3><button class="btn small soft" data-action="documents">Tout voir</button></div>
+ ${recent.length?recent.map(docSummary).join(""):'<p class="muted">Aucun document enregistré pour le moment.</p>'}</section>
+ <section class="card"><h3>Accès rapides</h3><div class="actions"><button class="btn" data-action="catalog">Catalogue</button><button class="btn" data-action="history">Historique</button><button class="btn" data-action="backup">Sauvegarde</button></div></section>
+ <p class="hint">Les informations sont enregistrées dans ce navigateur. Pense à exporter régulièrement une sauvegarde.</p>`}
+function docSummary(d){let c=calc(d);return `<div class="item"><div class="itemtop"><div><div class="itemtitle">${esc(d.number||"Brouillon")} · ${esc(d.type)}</div><div class="itemmeta">${esc(d.clientName||"Client à renseigner")} · ${esc(d.date||"")}</div></div><div style="text-align:right"><b>${money(c.ttc)}</b><div class="pill">${esc(d.status||"Brouillon")}</div></div></div><div class="toolbar"><button class="btn small" data-action="open-doc" data-id="${esc(d.id)}">Ouvrir</button>${d.type==="Devis"?`<button class="btn small" data-action="convert" data-id="${esc(d.id)}">Créer facture</button>`:""}</div></div>`}
+function clientsView(){return `<section class="card"><div class="itemtop"><h2>Mes clients</h2><button class="btn primary" data-action="new-client">＋ Ajouter</button></div><div class="search"><input id="clientSearch" placeholder="Rechercher un client…" value="${esc(state.filter)}"></div><div id="clientList">${clientRows()}</div><button class="btn full soft" data-action="home">Retour à l'accueil</button></section>`}
+function clientRows(){let q=state.filter.toLowerCase();let a=db.clients.filter(c=>(c.name+" "+(c.email||"")+" "+(c.phone||"")).toLowerCase().includes(q));return a.length?a.map(c=>`<div class="item"><div class="itemtop"><div><div class="itemtitle">${esc(c.name)}</div><div class="itemmeta">${esc(c.phone||"")} ${c.email?"· "+esc(c.email):""}<br>${esc(c.address||"")}</div></div><button class="btn small" data-action="edit-client" data-id="${esc(c.id)}">Modifier</button></div><div class="toolbar"><button class="btn small primary" data-action="quote-client" data-id="${esc(c.id)}">Nouveau devis</button><button class="btn small" data-action="invoice-client" data-id="${esc(c.id)}">Facture</button><button class="btn small danger" data-action="delete-client" data-id="${esc(c.id)}">Supprimer</button></div></div>`).join(""):'<p class="muted">Aucun client correspondant.</p>'}
+function clientForm(c={}){state.editClient=c.id||null;setScreen("clientform");}
+function clientFormView(){let c=db.clients.find(x=>x.id===state.editClient)||{};return `<section class="card"><h2>${c.id?"Modifier le client":"Nouveau client"}</h2><form id="clientForm">
+ <div class="field"><label>Nom / société *</label><input name="name" required value="${esc(c.name||"")}" placeholder="Nom du client"></div>
+ <div class="grid2"><div class="field"><label>Téléphone</label><input name="phone" type="tel" value="${esc(c.phone||"")}"></div><div class="field"><label>Email</label><input name="email" type="email" value="${esc(c.email||"")}"></div></div>
+ <div class="field"><label>Adresse</label><input name="address" value="${esc(c.address||"")}"></div>
+ <div class="field"><label>Code postal et ville</label><input name="zipcity" value="${esc(c.zipcity||"")}"></div>
+ <div class="actions"><button class="btn" type="button" data-action="clients">Annuler</button><button class="btn primary" type="submit">Enregistrer le client</button></div></form></section>`}
+function editorView(){let d=state.doc;if(!d)return homeView();let selected=db.clients.find(c=>c.id===d.clientId);let totals=calc(d);return `
+ <section class="card"><div class="itemtop"><h2>${d.id?"Modifier":"Créer"} ${esc(d.type)}</h2><span class="pill">${esc(d.status)}</span></div>
+ <div class="grid2"><div class="field"><label>Type de document</label><select id="dType"><option ${d.type==="Devis"?"selected":""}>Devis</option><option ${d.type==="Facture"?"selected":""}>Facture</option></select></div><div class="field"><label>Date</label><input id="dDate" type="date" value="${esc(d.date)}"></div></div>
+ <div class="field"><label>État du document</label><select id="dStatus">${(d.type==="Devis"?["Brouillon","Envoyé","Accepté","Refusé"]:["Brouillon","Envoyée","En attente","Partiellement réglée","Payée"]).map(v=>`<option ${d.status===v?"selected":""}>${v}</option>`).join("")}</select></div>
+ <div class="field"><label>Client enregistré</label><select id="dClient"><option value="">— Choisir un client —</option>${db.clients.map(c=>`<option value="${esc(c.id)}" ${d.clientId===c.id?"selected":""}>${esc(c.name)}</option>`).join("")}</select></div>
+ <div class="actions"><button class="btn small" data-action="new-client-from-doc">＋ Nouveau client</button></div>
+ <div class="field"><label>Nom du client *</label><input id="dClientName" value="${esc(d.clientName)}" placeholder="Nom / société"></div>
+ <div class="field"><label>Adresse du client</label><input id="dClientAddress" value="${esc(d.clientAddress)}"></div>
+ <div class="grid2"><div class="field"><label>Téléphone</label><input id="dClientPhone" value="${esc(d.clientPhone)}" type="tel"></div><div class="field"><label>Email</label><input id="dClientEmail" value="${esc(d.clientEmail)}" type="email"></div></div>
+ <div class="field"><label>Adresse du chantier</label><input id="dSite" value="${esc(d.site)}" placeholder="Si différente de l'adresse client"></div>
+ <div class="field"><label>Objet du chantier</label><input id="dSubject" value="${esc(d.subject)}" placeholder="Ex. Aménagement de combles"></div>
+ </section>
+ <section class="card"><div class="itemtop"><h3>Prestations</h3><button class="btn small" data-action="catalog">Gérer le catalogue</button></div>
+ ${db.catalog.map((p,i)=>`<button class="btn small" style="margin:3px 3px 3px 0" data-action="add-preset" data-index="${i}">＋ ${esc(p.name)}</button>`).join("")}
+ <div id="docLines">${lineRows(d)}</div><button class="btn full soft" data-action="add-line">＋ Ajouter une ligne libre</button>
+ <div class="field"><label>Remarques / conditions particulières</label><textarea id="dNotes">${esc(d.notes||"")}</textarea></div></section>
+ <section class="card"><h3>Totaux et acompte</h3><div class="field"><label>Acompte demandé (%)</label><input id="dDeposit" type="number" min="0" max="100" step="1" value="${Number(d.depositRate)||0}"></div><div class="totalbox" id="totals">${totalsView(totals,d)}</div></section>
+ ${d.type==="Facture"?paymentView(d):""}
+ <section class="card"><h3>Aperçu du document</h3><div id="preview">${documentHTML(d)}</div></section>
+ <div class="toolbar no-print"><button class="btn" data-action="home">Accueil</button><button class="btn primary" data-action="save-doc">Enregistrer</button><button class="btn good" data-action="print-doc">PDF / Imprimer</button></div>
+ <p class="hint">Enregistre le document avant de l'imprimer. Sur iPhone, utilise ensuite Partager → Enregistrer dans Fichiers ou envoyer par Mail.</p>`}
+function lineRows(d){return (d.lines||[]).map((l,i)=>`<div class="linecard" data-line="${i}"><div class="linehead"><b>Prestation ${i+1}</b><button class="btn small danger" data-action="remove-line" data-index="${i}">Supprimer</button></div>
+ <div class="field"><label>Description</label><input data-linefield="name" data-index="${i}" value="${esc(l.name)}"></div>
+ <div class="linegrid"><div class="field"><label>Quantité</label><input type="number" min="0" step="0.01" data-linefield="qty" data-index="${i}" value="${Number(l.qty)||0}"></div><div class="field"><label>Prix unitaire HT (€)</label><input type="number" min="0" step="0.01" data-linefield="price" data-index="${i}" value="${Number(l.price)||0}"></div><div class="field"><label>Unité</label><input data-linefield="unit" data-index="${i}" value="${esc(l.unit||"unité")}"></div><div class="field"><label>TVA</label><select data-linefield="vat" data-index="${i}">${[0,5.5,10,20].map(v=>`<option value="${v}" ${Number(l.vat)===v?"selected":""}>${String(v).replace(".",",")} %</option>`).join("")}</select></div></div><div class="muted" style="text-align:right">Total ligne : <b>${money((Number(l.qty)||0)*(Number(l.price)||0)*(1+(Number(l.vat)||0)/100))} TTC</b></div></div>`).join("")||'<p class="muted">Aucune prestation ajoutée.</p>'}
+function totalsView(t,d){return `<div class="totalrow"><span>Total HT</span><b>${money(t.ht)}</b></div><div class="totalrow"><span>Total TVA</span><b>${money(t.tva)}</b></div><div class="totalrow big"><span>Total TTC</span><span>${money(t.ttc)}</span></div><div class="totalrow"><span>Acompte (${Number(d.depositRate)||0} %)</span><b>${money(t.deposit)}</b></div><div class="totalrow"><span>Déjà réglé</span><b>${money(t.paid)}</b></div><div class="totalrow"><span>Reste à payer</span><b>${money(t.balance)}</b></div>`}
+function paymentView(d){return `<section class="card"><h3>Règlements reçus</h3>${(d.payments||[]).map((p,i)=>`<div class="item"><div class="itemtop"><span>${esc(p.date)} · ${esc(p.method)}</span><b>${money(p.amount)}</b></div><button class="btn small danger" data-action="remove-payment" data-index="${i}">Supprimer</button></div>`).join("")}<div class="grid2"><div class="field"><label>Montant reçu (€)</label><input id="payAmount" type="number" min="0" step="0.01" placeholder="0,00"></div><div class="field"><label>Date</label><input id="payDate" type="date" value="${today()}"></div></div><div class="grid2"><div class="field"><label>Mode de paiement</label><select id="payMethod"><option>Virement</option><option>Chèque</option><option>Espèces</option><option>Carte bancaire</option><option>Autre</option></select></div><div class="field"><label>&nbsp;</label><button class="btn good full" data-action="add-payment">Ajouter règlement</button></div></div></section>`}
+function documentHTML(d){let s=db.settings,t=calc(d);let lines=(d.lines||[]).map(l=>`<tr><td>${esc(l.name)}</td><td>${esc(l.unit)}</td><td class="right">${Number(l.qty)||0}</td><td class="right">${money(l.price)}</td><td class="right">${Number(l.vat)||0}%</td><td class="right">${money((Number(l.qty)||0)*(Number(l.price)||0))}</td></tr>`).join("");return `<div class="docpaper"><div class="dochead"><div><h2>${esc(s.company||"DC RENOV")}</h2><div>${esc(s.address)}<br>${esc(s.zipcity)}<br>${esc(s.phone)}<br>${esc(s.email)}</div><div>${s.siret?"SIRET : "+esc(s.siret):""}</div></div><div class="docright"><h2>${esc(d.type)}</h2><b>${esc(d.number||"BROUILLON")}</b><br>Date : ${esc(d.date||"")}<br>${d.type==="Facture"&&d.dueDate?"Échéance : "+esc(d.dueDate):""}</div></div>
+ <div class="docgrid"><div><h4>CLIENT</h4><p><b>${esc(d.clientName)}</b></p><p>${esc(d.clientAddress)}</p><p>${esc(d.clientPhone)} ${esc(d.clientEmail)}</p></div><div><h4>CHANTIER</h4><p>${esc(d.site||d.clientAddress)}</p><p>${esc(d.subject)}</p></div></div>
+ <table class="doctable"><thead><tr><th>Prestation</th><th>Unité</th><th class="right">Qté</th><th class="right">PU HT</th><th class="right">TVA</th><th class="right">Total HT</th></tr></thead><tbody>${lines||'<tr><td colspan="6">Aucune prestation</td></tr>'}</tbody></table>
+ <div class="doctot"><div><span>Total HT</span><b>${money(t.ht)}</b></div><div><span>Total TVA</span><b>${money(t.tva)}</b></div><div class="grand"><span>Total TTC</span><b>${money(t.ttc)}</b></div>${d.type==="Devis"?`<div><span>Acompte demandé</span><b>${money(t.deposit)}</b></div>`:`<div><span>Déjà réglé</span><b>${money(t.paid)}</b></div><div><span>Reste à payer</span><b>${money(t.balance)}</b></div>`}</div>
+ ${d.notes?`<p><b>Remarques :</b> ${esc(d.notes)}</p>`:""}<div class="ment"><h4>Informations professionnelles</h4><p>${s.siret?"SIRET : "+esc(s.siret)+" · ":""}${s.vatid?"TVA intracommunautaire : "+esc(s.vatid)+" · ":""}${s.insurance?"Assurance décennale : "+esc(s.insurance)+" · ":""}</p><p>${d.type==="Devis"?"Devis valable "+esc(s.quoteValidity)+" jours. Bon pour accord, date et signature du client.": "Conditions de règlement : "+esc(s.paymentDays)+" jours. " + (s.latePenalty?"Pénalités de retard : "+esc(s.latePenalty)+". ":"") + (s.recovery?"Indemnité forfaitaire de recouvrement : "+esc(s.recovery)+" € (si applicable).":"")}</p><p>${esc(s.legalNote||"")}</p></div>${d.type==="Devis"?'<div class="sig">Bon pour accord — Date et signature du client<div></div></div>':""}</div>`}
+function documentsView(){return `<section class="card"><div class="itemtop"><h2>Mes documents</h2><button class="btn small" data-action="history">Historique</button></div><div class="search"><input id="docSearch" placeholder="Rechercher numéro, client…" value="${esc(state.filter)}"></div><div id="docsList">${documentsRows()}</div><button class="btn full soft" data-action="home">Retour à l'accueil</button></section>`}
+function documentsRows(){let docs=[...db.docs].sort((a,b)=>(b.updated||b.created||0)-(a.updated||a.created||0));let q=state.filter.toLowerCase();docs=docs.filter(d=>(d.number+" "+d.clientName+" "+d.type+" "+d.status).toLowerCase().includes(q));return docs.length?docs.map(docSummary).join(""):'<p class="muted">Aucun document trouvé.</p>'}
+function settingsView(){let s=db.settings;return `<section class="card"><h2>Réglages de l'entreprise</h2><form id="settingsForm">
+ ${field("company","Nom de l'entreprise",s.company)}${field("address","Adresse",s.address)}${field("zipcity","Code postal et ville",s.zipcity)}
+ <div class="grid2">${field("phone","Téléphone",s.phone,"tel")}${field("email","Email",s.email,"email")}</div>
+ <div class="grid2">${field("siret","SIRET",s.siret)}${field("vatid","TVA intracommunautaire",s.vatid)}</div>
+ ${field("insurance","Assurance décennale (assureur / contrat)",s.insurance)}
+ <div class="grid2">${field("capital","Capital social (si applicable)",s.capital)}${field("mediator","Médiateur de la consommation (si applicable)",s.mediator)}</div>
+ <h3>Paramètres des documents</h3><div class="grid2">${field("deposit","Acompte par défaut (%)",s.deposit,"number")}${field("quoteValidity","Validité du devis (jours)",s.quoteValidity,"number")}</div>
+ <div class="grid2">${field("paymentDays","Délai de paiement (jours)",s.paymentDays,"number")}${field("recovery","Indemnité forfaitaire (€)",s.recovery,"number")}</div>
+ ${field("latePenalty","Pénalités de retard (texte)",s.latePenalty)}${field("legalNote","Autres mentions à afficher",s.legalNote,"textarea")}
+ <button class="btn primary full" type="submit">Enregistrer les réglages</button></form>
+ <div class="notice">Les mentions légales et taux de TVA doivent être vérifiés selon la situation réelle de l'entreprise et la nature des travaux. Le logiciel ne détermine pas automatiquement l'éligibilité à un taux réduit.</div></section>
+ <section class="card"><h3>Sauvegarde des données</h3><p class="muted">Exportez régulièrement clients, devis, factures et réglages dans un fichier de sauvegarde.</p><div class="actions"><button class="btn good" data-action="backup">Exporter mes données</button><button class="btn" data-action="restore">Importer une sauvegarde</button></div><input id="restoreFile" type="file" accept="application/json" class="hidden"></section>`}
+function field(name,label,value,type="text"){return `<div class="field"><label>${esc(label)}</label>${type==="textarea"?`<textarea name="${name}">${esc(value||"")}</textarea>`:`<input name="${name}" type="${type}" value="${esc(value||"")}">`}</div>`}
+function catalogView(){return `<section class="card"><div class="itemtop"><h2>Catalogue de prestations</h2><button class="btn primary" data-action="add-catalog">＋ Ajouter</button></div><p class="muted">Modifie les intitulés, unités, prix et TVA selon tes tarifs. Les prix proposés sont des exemples à remplacer.</p>${db.catalog.map((p,i)=>`<div class="item"><div class="itemtop"><div><b>${esc(p.name)}</b><div class="itemmeta">${esc(p.unit)} · ${money(p.price)} HT · TVA ${p.vat}%</div></div><button class="btn small" data-action="edit-catalog" data-index="${i}">Modifier</button></div></div>`).join("")}<button class="btn full soft" data-action="home">Retour</button></section>`}
+function catalogForm(i){let p=i>=0?db.catalog[i]:{name:"",unit:"m²",price:0,vat:Number(db.settings.defaultVat)||10};state.catalogEdit=i;setScreen("catalogform");}
+function catalogFormView(){let p=state.catalogEdit>=0?db.catalog[state.catalogEdit]:{name:"",unit:"m²",price:0,vat:10};return `<section class="card"><h2>${state.catalogEdit>=0?"Modifier":"Ajouter"} une prestation</h2><form id="catalogForm">${field("name","Intitulé",p.name)}<div class="grid2">${field("unit","Unité (m², ml, heure, forfait…)",p.unit)}${field("price","Prix unitaire HT (€)",p.price,"number")}</div><div class="field"><label>TVA</label><select name="vat">${[0,5.5,10,20].map(v=>`<option value="${v}" ${Number(p.vat)===v?"selected":""}>${v}%</option>`).join("")}</select></div><div class="actions"><button type="button" class="btn" data-action="catalog">Annuler</button><button class="btn primary" type="submit">Enregistrer</button></div></form>${state.catalogEdit>=0?'<button class="btn danger full" style="margin-top:9px" data-action="delete-catalog">Supprimer cette prestation</button>':""}</section>`}
+function historyView(){return `<section class="card"><h2>Historique</h2><div class="search"><input id="historySearch" placeholder="Filtrer l'historique…" value="${esc(state.filter)}"></div><div id="historyList">${historyRows()}</div><button class="btn full soft" data-action="home">Retour</button></section>`}
+function historyRows(){let q=state.filter.toLowerCase();let ds=db.docs.filter(d=>(d.status||"").toLowerCase().includes(q)||(d.number||"").toLowerCase().includes(q)||(d.clientName||"").toLowerCase().includes(q));return ds.length?ds.map(docSummary).join(""):'<p class="muted">Aucun historique pour le moment.</p>'}
+function render(){let a=el("app");switch(state.screen){case"home":a.innerHTML=homeView();break;case"clients":a.innerHTML=clientsView();break;case"clientform":a.innerHTML=clientFormView();break;case"editor":a.innerHTML=editorView();break;case"documents":a.innerHTML=documentsView();break;case"settings":a.innerHTML=settingsView();break;case"catalog":a.innerHTML=catalogView();break;case"catalogform":a.innerHTML=catalogFormView();break;case"history":a.innerHTML=historyView();break;default:a.innerHTML=homeView();}window.scrollTo(0,0)}
+function readEditor(){let d=state.doc;d.type=el("dType").value;d.date=el("dDate").value;d.status=el("dStatus")?el("dStatus").value:d.status;d.clientId=el("dClient").value;d.clientName=el("dClientName").value.trim();d.clientAddress=el("dClientAddress").value.trim();d.clientPhone=el("dClientPhone").value.trim();d.clientEmail=el("dClientEmail").value.trim();d.site=el("dSite").value.trim();d.subject=el("dSubject").value.trim();d.notes=el("dNotes").value;d.depositRate=Number(el("dDeposit").value)||0}
+function updateEditorPreview(){if(state.screen!=="editor")return;try{readEditor();el("totals").innerHTML=totalsView(calc(state.doc),state.doc);el("preview").innerHTML=documentHTML(state.doc)}catch(e){}}
+function saveDoc(){readEditor();let d=state.doc;if(!d.clientName){alert("Indique le nom du client.");return}if(!d.lines.length){alert("Ajoute au moins une prestation.");return}if(d.lines.some(l=>!l.name.trim()||Number(l.qty)<=0||Number(l.price)<0)){alert("Vérifie les descriptions, quantités et prix des prestations.");return}
+ if(!d.number)d.number=nextNumber(d.type);if(!d.id){d.id=uid();d.created=Date.now()}d.updated=Date.now();if(d.type==="Facture"&&!d.dueDate){let date=new Date((d.date||today())+"T12:00:00");date.setDate(date.getDate()+(Number(db.settings.paymentDays)||30));d.dueDate=date.toISOString().slice(0,10)}
+ let old=db.docs.findIndex(x=>x.id===d.id);if(old>=0)db.docs[old]=structuredClone(d);else db.docs.unshift(structuredClone(d));
+ if(d.clientId){let c=db.clients.find(x=>x.id===d.clientId);if(c){Object.assign(c,{name:d.clientName,address:d.clientAddress,phone:d.clientPhone,email:d.clientEmail});}}else{let c=db.clients.find(x=>x.name.toLowerCase()===d.clientName.toLowerCase());if(!c){db.clients.push({id:uid(),name:d.clientName,address:d.clientAddress,phone:d.clientPhone,email:d.clientEmail});}}
+ persist();alert("Document enregistré.");render()}
+function convertQuote(id){let q=db.docs.find(x=>x.id===id);if(!q)return;if(!confirm("Créer une facture à partir de ce devis ? Le devis original sera conservé."))return;let d=structuredClone(q);d.id=null;d.number="";d.type="Facture";d.date=today();d.status="Brouillon";d.payments=[];d.sourceQuote=q.number;d.dueDate="";newDoc("Facture",d)}
+function printDoc(){readEditor();if(!state.doc.number){if(!confirm("Le document n'est pas encore enregistré. Enregistrer avant impression ?"))return;saveDoc();}window.print()}
+function exportBackup(){let blob=new Blob([JSON.stringify({...db,exportedAt:new Date().toISOString()},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="sauvegarde-dc-renov-"+today()+".json";a.click();URL.revokeObjectURL(a.href)}
+function restoreBackup(file){let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.settings||!Array.isArray(x.docs)||!Array.isArray(x.clients))throw Error();if(!confirm("Remplacer les données actuelles par cette sauvegarde ?"))return;db={...structuredClone(defaults),...x,settings:{...defaults.settings,...x.settings},counters:{...defaults.counters,...x.counters}};persist();alert("Sauvegarde restaurée.");setScreen("home")}catch(e){alert("Fichier de sauvegarde invalide.")}};r.readAsText(file)}
+document.addEventListener("click",e=>{let b=e.target.closest("[data-action]");if(!b)return;let a=b.dataset.action,id=b.dataset.id,i=Number(b.dataset.index);
+ switch(a){
+ case"home":home();break;case"new-quote":newDoc("Devis");break;case"new-invoice":newDoc("Facture");break;case"clients":state.filter="";setScreen("clients");break;case"documents":state.filter="";setScreen("documents");break;case"history":state.filter="";setScreen("history");break;case"settings":setScreen("settings");break;case"catalog":setScreen("catalog");break;
+ case"new-client":state.editClient=null;setScreen("clientform");break;case"new-client-from-doc":state.returnToEditor=true;state.editClient=null;setScreen("clientform");break;case"edit-client":state.editClient=id;setScreen("clientform");break;
+ case"delete-client":if(confirm("Supprimer ce client ? Les documents déjà créés seront conservés.")){db.clients=db.clients.filter(c=>c.id!==id);persist();render()}break;
+ case"quote-client":case"invoice-client":{let c=db.clients.find(x=>x.id===id);newDoc(a==="quote-client"?"Devis":"Facture");if(c){Object.assign(state.doc,{clientId:c.id,clientName:c.name,clientAddress:c.address||"",clientPhone:c.phone||"",clientEmail:c.email||""});render()}break}
+ case"open-doc":openDoc(id);break;case"convert":convertQuote(id);break;case"save-doc":saveDoc();break;case"print-doc":printDoc();break;
+ case"add-preset":{readEditor();let p=db.catalog[i];state.doc.lines.push({name:p.name,unit:p.unit,qty:1,price:Number(p.price)||0,vat:Number(p.vat)||10});render();break}
+ case"add-line":readEditor();state.doc.lines.push({name:"",unit:"unité",qty:1,price:0,vat:Number(db.settings.defaultVat)||10});render();break;
+ case"remove-line":readEditor();state.doc.lines.splice(i,1);render();break;
+ case"add-payment":readEditor();{let amount=Number(el("payAmount").value);if(!amount||amount<=0){alert("Saisis un montant valide.");break}state.doc.payments.push({amount,date:el("payDate").value||today(),method:el("payMethod").value});state.doc.status=calc(state.doc).balance<=0.005?"Payée":"Partiellement réglée";render()}break;
+ case"remove-payment":readEditor();state.doc.payments.splice(i,1);state.doc.status="En attente";render();break;
+ case"backup":exportBackup();break;case"restore":el("restoreFile").click();break;
+ case"add-catalog":catalogForm(-1);break;case"edit-catalog":catalogForm(i);break;case"delete-catalog":if(confirm("Supprimer cette prestation du catalogue ?")){db.catalog.splice(state.catalogEdit,1);persist();setScreen("catalog")}break;
+ }
+});
+document.addEventListener("input",e=>{if(e.target.id==="clientSearch"||e.target.id==="docSearch"||e.target.id==="historySearch"){state.filter=e.target.value;if(e.target.id==="clientSearch")el("clientList").innerHTML=clientRows();if(e.target.id==="docSearch")el("docsList").innerHTML=documentsRows();if(e.target.id==="historySearch")el("historyList").innerHTML=historyRows();return}
+ if(e.target.dataset.linefield){let i=Number(e.target.dataset.index),k=e.target.dataset.linefield,v=e.target.value;state.doc.lines[i][k]=["qty","price","vat"].includes(k)?Number(v):v;updateEditorPreview();return}
+ if(["dClientName","dClientAddress","dClientPhone","dClientEmail","dSite","dSubject","dNotes","dDeposit","dDate"].includes(e.target.id))updateEditorPreview()
+});
+document.addEventListener("change",e=>{if(e.target.id==="dClient"){let c=db.clients.find(x=>x.id===e.target.value);if(c){el("dClientName").value=c.name;el("dClientAddress").value=c.address||"";el("dClientPhone").value=c.phone||"";el("dClientEmail").value=c.email||"";state.doc.clientId=c.id;updateEditorPreview()}else state.doc.clientId=""}
+ if(e.target.id==="dType"){state.doc.type=e.target.value;state.doc.status="Brouillon";render()}
+ if(e.target.id==="restoreFile"&&e.target.files[0])restoreBackup(e.target.files[0]);
+});
+document.addEventListener("submit",e=>{e.preventDefault();let f=e.target;
+ if(f.id==="clientForm"){let data=Object.fromEntries(new FormData(f));if(!data.name.trim()){alert("Le nom du client est obligatoire.");return}let c=db.clients.find(x=>x.id===state.editClient);if(c)Object.assign(c,data);else db.clients.push({id:uid(),...data});persist();if(state.returnToEditor){state.returnToEditor=false;let saved=db.clients[db.clients.length-1];Object.assign(state.doc,{clientId:saved.id,clientName:saved.name,clientAddress:saved.address||"",clientPhone:saved.phone||"",clientEmail:saved.email||""});setScreen("editor")}else setScreen("clients")}
+ if(f.id==="settingsForm"){let data=Object.fromEntries(new FormData(f));db.settings={...db.settings,...data};persist();alert("Réglages enregistrés.");setScreen("home")}
+ if(f.id==="catalogForm"){let data=Object.fromEntries(new FormData(f));data.price=Number(data.price)||0;data.vat=Number(data.vat)||0;if(!data.name.trim()){alert("L'intitulé est obligatoire.");return}if(state.catalogEdit>=0)db.catalog[state.catalogEdit]=data;else db.catalog.push(data);persist();setScreen("catalog")}
+});
+render();
+</script>
+</body></html>
